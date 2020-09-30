@@ -213,8 +213,12 @@ console.log(artists[2].bio);
 
 /* Task 2: There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is currently Vincent Van Dough. Use an array method to fix this issue and console.log() to check your work. */
 
-artists[8].name = 'Vincent Van Gogh';
-console.log(artists[8].name);
+const vanGogh = artists.find( element => element.name === 'Vincent van Dough');
+
+vanGogh.name = 'Vincent Van Gogh';
+console.log(vanGogh);
+// artists[8].name = 'Vincent Van Gogh';
+// console.log(artists[8].name);
 
 /* Task 3: Create a function called `getArtistByIndex` that takes two arguments:
  *     (1) artists array
@@ -236,16 +240,24 @@ function getArtistByIndex(array, index) {
 /* Task 4: Create a function called get20s() that takes data as an argument and returns an array with names of artists who were born in and died in 20th century (1900-2000) example born in 1901 and died in 1959 - included / born in 1889 and died in 1925 not included - should return ["Salvador Dali", "Frida Kahlo"]*/
 
 
-function get20s(value, index, arr){
-let born = 1900;
-let death = 2000;
-  return arr[index].value === born - death;
+function get20s(arr){
+/* Code here */
 
-  /* Code here */
+const newArr =  arr.filter(function(art) {
+  const newYears = art.years.split('-');
+  let born = Number(newYears[0]);
+  let death = Number(newYears[1]);
+  if(born > 1900  && death < 2000) {
+    return true;
+  }
+}).map(function(artname) { return artname.name}  )
+;
+return newArr
+};
+// con
 
-}
 
-// console.log(get20s(artists))
+console.log(get20s(artists))
 
 /* Task 5: Create a function called `removeArtist` that takes two arguments:
  *     (1) artists array
@@ -267,7 +279,7 @@ function removeArtist(array, index) {
     }
     
   }
-  // removeArtist(artists, 0);
+   removeArtist(artists, 0);
   
  
 
@@ -310,18 +322,20 @@ and returns an array with names of artists who painted more than 100 paintings.
 For example lotsOfArt(artists); will return ["Amedeo Modigliani", "Rene Magritte", ..."Albrecht Dürer"]*/
 
 function lotsOfArt(artArr){
-let filteredArt = [];
-for( let i=0; i=artArr.length; i++){
-  if(artArr[i] > 100){
-    filteredArt.push(artArr[i]);
-  }
-}
-return filteredArt;
   /* Code here */
+ const newArr =  artArr.filter(function(art) {
+    if(art.paintings > 100) {
+      return true;
+    };
+  });
+  return newArr;
+};
+// const paint = artists.filter(function(art) {
+//   if(art.paintings > 100) {
+//     return true;
+//   };
+// });
 
-}
-
-console.log(artists[0].paintings);
 console.log(lotsOfArt(artists));
 
 // 🎨🎨 STRETCH 🎨🎨//
